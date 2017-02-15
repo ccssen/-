@@ -16,7 +16,7 @@
 //			控制轮播速度
 			speed:2000,
 		};
-//		对象合并让options和setting合并使setting改变
+//		对象合并让options和setting合并使setting改变,
 		$.extend(true, setting, options);
 	//线规定好每张图片处于的位置和状态
 	var states = [
@@ -84,6 +84,7 @@
 		$(this).each(function(i,ele){
 			slide(ele,options);
 		})
+		return this;
 	}
 })(jQuery);
 //jQuery实参
