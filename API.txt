@@ -1,0 +1,33 @@
+
+//详细API:
+
+本插件共包含两个文件,jquery.zyslide.css,jquery.zyslide.js.
+1:其中css文件中的.zy-slide为所需轮播的标签class名,这个.zy-slide标签内应包含section,ul>li>img等标签.其中section的class名为.zy-prev,
+.zy-next作为点击上一张下一张按钮.具体示例如下：
+		<div class="slide zy-slide">
+			<section class="zy-prev">上一张</section>
+			<section class="zy-next">下一张</section>
+			<ul>
+				<li><img src="images/images/1.jpg" alt="轮播图" /></li>
+				<li><img src="images/images/2.jpg" alt="轮播图" /></li>
+				<li><img src="images/images/3.jpg" alt="轮播图" /></li>
+				<li><img src="images/images/4.jpg" alt="轮播图" /></li>
+				<li><img src="images/images/5.jpg" alt="轮播图" /></li>
+				<li><img src="images/images/6.jpg" alt="轮播图" /></li>
+				<li><img src="images/images/7.jpg" alt="轮播图" /></li>
+			</ul>
+		</div>
+2:本插件中的重点是jquery.zyslide.js文件.本文件总的来说是一个自运行的匿名函数,这样可以使插件本身实现闭包并减少全局变量.
+最外层方法传入的形参$和实参jQuery可以避免$被第三方调用导致$不可用.在自运行的匿名函数里有两个函数,(1)第一个函数为轮播效果的代码,第一个函数slide()
+可以传入两个参数ele.options,这里ele代表需要轮播的元素的根标签,options是一个控制轮播时间的对象,它包含speed(轮播速度)和delay(刚开始图片炸开速度)两个属性.
+(2)第二个函数为本文件中封装插件方法,并返回本标签使插件支持链式调用
+$.fn.zySlide = function(options){
+		console.log(this);
+		$(this).each(function(i,ele){
+			slide(ele,options);
+		})
+		return this;
+	}
+这个方法zySlide中传入的ele和options会被传入slide()里.options也就是传入控制轮播的时间的元素,ele就是需要轮播的元素的根标签.	
+注意：本插件中封装的是固定7个图片且图片的SRC也是固定了的轮播效果，若需要更多图片轮播请自行修改jquery.zyslide.js这个文件中的相关内容
+
