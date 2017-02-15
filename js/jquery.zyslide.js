@@ -6,7 +6,7 @@
 //也就是说只会产生一个轮播图,这个函数只能分配给一个轮播图
 //所以在调用本函数的时候务必把当前轮播的根标签作为实参传递过来
 //这里的形参elem就是某个轮播的根标签
-	var slide=function(elem){
+	var slide=function(elem,options){
 //		转化为jQuery标签对象
 		var $elem = $(elem);
 		//添加默认设置选项
@@ -15,8 +15,9 @@
 			delay:1000,
 //			控制轮播速度
 			speed:2000,
-			
 		};
+//		对象合并让options和setting合并使setting改变
+		$.extend(true, setting, options);
 	//线规定好每张图片处于的位置和状态
 	var states = [
 		{zInde: 1,width: 120,height: 150,top: 69,left: 134,op: 0.4},
@@ -78,10 +79,10 @@
 //	slide($('.zy-slide').eq(i));
 //	}
 //	$.fn:jquery封装插件方法,fn:以后写样式选择器
-	$.fn.zySlide = function(){
+	$.fn.zySlide = function(options){
 		console.log(this);
 		$(this).each(function(i,ele){
-			slide(ele);
+			slide(ele,options);
 		})
 	}
 })(jQuery);
